@@ -144,7 +144,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#contents"><i class="fa fa-check"></i><b>1.1</b> Contents</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#contents"><i class="fa fa-check"></i><b>1.1</b> Contents</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#sequence-reads-to-snp-level-parent-specific-read-counts"><i class="fa fa-check"></i>Sequence reads to SNP-level parent-specific read counts</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#snp-level-parent-specific-read-counts-to-allele-specific-transcription"><i class="fa fa-check"></i>SNP-level parent-specific read counts to allele-specific transcription</a></li>
+</ul></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#data"><i class="fa fa-check"></i><b>1.2</b> Data</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="sequence-reads-to-snp-level-parent-specific-read-counts-1.html"><a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html"><i class="fa fa-check"></i><b>2</b> Sequence reads to SNP-level parent-specific read counts</a>
@@ -176,9 +180,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html#overview-1"><i class="fa fa-check"></i><b>3.1</b> Overview</a></li>
 <li class="chapter" data-level="3.2" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html#setup-1"><i class="fa fa-check"></i><b>3.2</b> Setup</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html#packages"><i class="fa fa-check"></i><b>3.2.1</b> Packages</a></li>
-<li class="chapter" data-level="3.2.2" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html#custom-functions"><i class="fa fa-check"></i><b>3.2.2</b> Custom functions</a></li>
-<li class="chapter" data-level="3.2.3" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html#sample-metadata"><i class="fa fa-check"></i><b>3.2.3</b> Sample metadata</a></li>
+<li class="chapter" data-level="3.2.1" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html#tutorial-files"><i class="fa fa-check"></i><b>3.2.1</b> Tutorial files</a></li>
+<li class="chapter" data-level="3.2.2" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html#packages"><i class="fa fa-check"></i><b>3.2.2</b> Packages</a></li>
+<li class="chapter" data-level="3.2.3" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html#custom-functions"><i class="fa fa-check"></i><b>3.2.3</b> Custom functions</a></li>
+<li class="chapter" data-level="3.2.4" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html#sample-metadata"><i class="fa fa-check"></i><b>3.2.4</b> Sample metadata</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html#generate-sample-x-snpgene-count-matrix"><i class="fa fa-check"></i><b>3.3</b> Generate sample x SNP:gene count matrix</a>
 <ul>
@@ -226,7 +231,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">2</span> Sequence reads to SNP-level parent-specific read counts<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#sequence-reads-to-snp-level-parent-specific-read-counts-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="overview" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> Overview<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#overview" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>This tutorial demonstrates best practices for processing whole genome sequence (WGS) and mRNA sequencing (mRNA-seq) reads for allele-specific transcriptomics analysis. <br /></p>
+<p>This bash tutorial demonstrates best practices for processing whole genome sequence (WGS) and mRNA sequencing (mRNA-seq) reads for allele-specific transcriptomics analysis. <br /></p>
 <p>Sequencing data for this tutorial are described in <a href="https://doi.org/10.1101/2024.06.09.598129">Bresnahan <em>et al.</em>, 2024, “Intragenomic conflict underlies extreme phenotypic plasticity in queen-worker caste determination in honey bees (<em>Apis mellifera</em>)”, <em>bioRxiv</em></a>. See the <a href="index.html">tutorial introduction</a> for more details. <br /></p>
 <p>F1 WGS reads are trimmed with fastp to remove adapter sequences and filter low-quality reads, then aligned to the <em>A. mellifera</em> <a href="https://www.ncbi.nlm.nih.gov/assembly/GCF_003254395.2/">Amel_HAv3.1 reference genome assembly</a> with BWA-MEM. Alignments are coordinate sorted and filtered using samtools. Duplicate alignments are removed with GATK MarkDuplicates. Variants against the <em>A. mellifera</em> reference genome assembly are detected using freebayes to account for differences in ploidy between diploid females (queens) and haploid males (drones). The variant calls are then filtered for quality and read depth with VCFtools, and all variants except homozygous SNPs are filtered with samtools BCFtools. The high-confidence homozygous SNPs are then integrated into the <em>A. mellifera</em> reference genome assembly with GATK FastaAlternativeReferenceMaker, and intersected using bedtools to identify SNPs that are unique to each parent but shared between the crosses of a reciprocal cross pair. Parent-specific SNPs are then intersected with the <em>A. mellifera</em> reference genome annotation with bedtools to identify positions within the longest transcript for each gene.</p>
 <p>F2 mRNA-seq reads are trimmed with fastp to remove adapter sequences, filter low-quality reads, and generate quality control metrics, and then aligned to each respective parent genome using STAR. Alignments are then filtered using samtools. For each sample, read coverage is calculated at each F1 SNP using bedtools intersect in strand-aware mode.</p>
@@ -1317,7 +1322,7 @@ done</code></pre>
 </tr>
 </tbody>
 </table>
-<p>In <a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription.html">Section 3: SNP-level parent-specific read counts to allele-specific transcription</a>, the resultant count files will be combined into a single matrix, and various statistical methods will be used to assess and compare allele-specific transcription between phenotypes.</p>
+<p>In <a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html">Section 3: SNP-level parent-specific read counts to allele-specific transcription</a>, the resultant count files will be combined into a single matrix, and various statistical methods will be used to assess and compare allele-specific transcription between phenotypes.</p>
 
 </div>
 </div>

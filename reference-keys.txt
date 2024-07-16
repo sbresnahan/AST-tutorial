@@ -33,6 +33,7 @@ mrna-seq-alignment-post-processing-and-allele-specific-read-counting
 snp-level-parent-specific-read-counts-to-allele-specific-transcription-1
 overview-1
 setup-1
+tutorial-files
 packages
 custom-functions
 sample-metadata
