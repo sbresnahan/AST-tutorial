@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Sequence reads to SNP-level parent-specific read counts | Allele-specific transcriptomics tutorial</title>
+  <meta name="description" content="2 Sequence reads to SNP-level parent-specific read counts | Allele-specific transcriptomics tutorial" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Sequence reads to SNP-level parent-specific read counts | Allele-specific transcriptomics tutorial" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Sequence reads to SNP-level parent-specific read counts | Allele-specific transcriptomics tutorial" />
+  
+  
+  
+
+<meta name="author" content="Sean T. Bresnahan" />
+
+
+<meta name="date" content="2024-07-15" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">AST Tutorial</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#contents"><i class="fa fa-check"></i><b>1.1</b> Contents</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#data"><i class="fa fa-check"></i><b>1.2</b> Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="sequence-reads-to-snp-level-parent-specific-read-counts-1.html"><a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html"><i class="fa fa-check"></i><b>2</b> Sequence reads to SNP-level parent-specific read counts</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="sequence-reads-to-snp-level-parent-specific-read-counts-1.html"><a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#overview"><i class="fa fa-check"></i><b>2.1</b> Overview</a></li>
+<li class="chapter" data-level="2.2" data-path="sequence-reads-to-snp-level-parent-specific-read-counts-1.html"><a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#setup"><i class="fa fa-check"></i><b>2.2</b> Setup</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="sequence-reads-to-snp-level-parent-specific-read-counts-1.html"><a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#command-line-tools"><i class="fa fa-check"></i><b>2.2.1</b> Command-line tools</a></li>
+<li class="chapter" data-level="" data-path="sequence-reads-to-snp-level-parent-specific-read-counts-1.html"><a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#project-directory-structure"><i class="fa fa-check"></i>Project directory structure</a></li>
+<li class="chapter" data-level="2.2.2" data-path="sequence-reads-to-snp-level-parent-specific-read-counts-1.html"><a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#amel_hav3.1-reference-genome-assembly-and-annotation-files"><i class="fa fa-check"></i><b>2.2.2</b> Amel_HAv3.1 reference genome assembly and annotation files</a></li>
+<li class="chapter" data-level="2.2.3" data-path="sequence-reads-to-snp-level-parent-specific-read-counts-1.html"><a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#a-note-on-parallel-processing-in-high-performance-computing-clusters"><i class="fa fa-check"></i><b>2.2.3</b> A note on parallel processing in high performance computing clusters</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="sequence-reads-to-snp-level-parent-specific-read-counts-1.html"><a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#generation-of-f1-genomes-and-transcriptomes"><i class="fa fa-check"></i><b>2.3</b> Generation of F1 genomes and transcriptomes</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="sequence-reads-to-snp-level-parent-specific-read-counts-1.html"><a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#wgs-read-pre-processing"><i class="fa fa-check"></i><b>2.3.1</b> WGS read pre-processing</a></li>
+<li class="chapter" data-level="2.3.2" data-path="sequence-reads-to-snp-level-parent-specific-read-counts-1.html"><a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#wgs-read-alignment-and-post-processing"><i class="fa fa-check"></i><b>2.3.2</b> WGS read alignment and post-processing</a></li>
+<li class="chapter" data-level="2.3.3" data-path="sequence-reads-to-snp-level-parent-specific-read-counts-1.html"><a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#variant-discovery-and-filtration"><i class="fa fa-check"></i><b>2.3.3</b> Variant discovery and filtration</a></li>
+<li class="chapter" data-level="2.3.4" data-path="sequence-reads-to-snp-level-parent-specific-read-counts-1.html"><a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#genome-and-transcriptome-construction"><i class="fa fa-check"></i><b>2.3.4</b> Genome and transcriptome construction</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="sequence-reads-to-snp-level-parent-specific-read-counts-1.html"><a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#quantification-of-f2-allele-specific-transcription"><i class="fa fa-check"></i><b>2.4</b> Quantification of F2 allele-specific transcription</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="sequence-reads-to-snp-level-parent-specific-read-counts-1.html"><a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#mrna-seq-read-pre-processing"><i class="fa fa-check"></i><b>2.4.1</b> mRNA-seq read pre-processing</a></li>
+<li class="chapter" data-level="2.4.2" data-path="sequence-reads-to-snp-level-parent-specific-read-counts-1.html"><a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#mrna-seq-read-alignment-to-f1-transcriptomes"><i class="fa fa-check"></i><b>2.4.2</b> mRNA-seq read alignment to F1 transcriptomes</a></li>
+<li class="chapter" data-level="2.4.3" data-path="sequence-reads-to-snp-level-parent-specific-read-counts-1.html"><a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#mrna-seq-alignment-post-processing-and-allele-specific-read-counting"><i class="fa fa-check"></i><b>2.4.3</b> mRNA-seq alignment post-processing and allele-specific read counting</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><i class="fa fa-check"></i><b>3</b> SNP-level parent-specific read counts to allele-specific transcription</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html#overview-1"><i class="fa fa-check"></i><b>3.1</b> Overview</a></li>
+<li class="chapter" data-level="3.2" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html#setup-1"><i class="fa fa-check"></i><b>3.2</b> Setup</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html#packages"><i class="fa fa-check"></i><b>3.2.1</b> Packages</a></li>
+<li class="chapter" data-level="3.2.2" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html#custom-functions"><i class="fa fa-check"></i><b>3.2.2</b> Custom functions</a></li>
+<li class="chapter" data-level="3.2.3" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html#sample-metadata"><i class="fa fa-check"></i><b>3.2.3</b> Sample metadata</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html#generate-sample-x-snpgene-count-matrix"><i class="fa fa-check"></i><b>3.3</b> Generate sample x SNP:gene count matrix</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html#filter-snps-by-transcript"><i class="fa fa-check"></i><b>3.3.1</b> Filter SNPs by transcript</a></li>
+<li class="chapter" data-level="3.3.2" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html#merge-count-files-to-matrix"><i class="fa fa-check"></i><b>3.3.2</b> Merge count files to matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html#prepare-sample-x-snpgene-counts-for-analysis"><i class="fa fa-check"></i><b>3.4</b> Prepare sample x SNP:gene counts for analysis</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html#normalize-by-library-size"><i class="fa fa-check"></i><b>3.4.1</b> Normalize by library size</a></li>
+<li class="chapter" data-level="3.4.2" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html#split-by-phenotype-and-filter-low-count-snps"><i class="fa fa-check"></i><b>3.4.2</b> Split by phenotype and filter low count SNPs</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html#conduct-statistical-tests"><i class="fa fa-check"></i><b>3.5</b> Conduct statistical tests</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html#snp-level-storer-kim-sk-binomial-exact-tests"><i class="fa fa-check"></i><b>3.5.1</b> SNP-level Storer-Kim (SK) binomial exact tests</a></li>
+<li class="chapter" data-level="3.5.2" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html#gene-level-general-linear-mixed-models-glimmix"><i class="fa fa-check"></i><b>3.5.2</b> Gene-level general linear mixed models (GLIMMIX)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html#allele-specific-transcription-analysis"><i class="fa fa-check"></i><b>3.6</b> Allele-specific transcription analysis</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html#fdr-correction-and-threshold-tests"><i class="fa fa-check"></i><b>3.6.1</b> FDR correction and threshold tests</a></li>
+<li class="chapter" data-level="3.6.2" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html#chi-squared-tests"><i class="fa fa-check"></i><b>3.6.2</b> Chi-squared tests</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html#data-visualization"><i class="fa fa-check"></i><b>3.7</b> Data visualization</a></li>
+<li class="chapter" data-level="3.8" data-path="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html"><a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html#session-info"><i class="fa fa-check"></i><b>3.8</b> Session info</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Allele-specific transcriptomics tutorial</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="sequence-reads-to-snp-level-parent-specific-read-counts-1" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> Sequence reads to SNP-level parent-specific read counts<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#sequence-reads-to-snp-level-parent-specific-read-counts-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="overview" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Overview<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#overview" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This tutorial demonstrates best practices for processing whole genome sequence (WGS) and mRNA sequencing (mRNA-seq) reads for allele-specific transcriptomics analysis. <br /></p>
+<p>Sequencing data for this tutorial are described in <a href="https://doi.org/10.1101/2024.06.09.598129">Bresnahan <em>et al.</em>, 2024, “Intragenomic conflict underlies extreme phenotypic plasticity in queen-worker caste determination in honey bees (<em>Apis mellifera</em>)”, <em>bioRxiv</em></a>. See the <a href="index.html">tutorial introduction</a> for more details. <br /></p>
+<p>F1 WGS reads are trimmed with fastp to remove adapter sequences and filter low-quality reads, then aligned to the <em>A. mellifera</em> <a href="https://www.ncbi.nlm.nih.gov/assembly/GCF_003254395.2/">Amel_HAv3.1 reference genome assembly</a> with BWA-MEM. Alignments are coordinate sorted and filtered using samtools. Duplicate alignments are removed with GATK MarkDuplicates. Variants against the <em>A. mellifera</em> reference genome assembly are detected using freebayes to account for differences in ploidy between diploid females (queens) and haploid males (drones). The variant calls are then filtered for quality and read depth with VCFtools, and all variants except homozygous SNPs are filtered with samtools BCFtools. The high-confidence homozygous SNPs are then integrated into the <em>A. mellifera</em> reference genome assembly with GATK FastaAlternativeReferenceMaker, and intersected using bedtools to identify SNPs that are unique to each parent but shared between the crosses of a reciprocal cross pair. Parent-specific SNPs are then intersected with the <em>A. mellifera</em> reference genome annotation with bedtools to identify positions within the longest transcript for each gene.</p>
+<p>F2 mRNA-seq reads are trimmed with fastp to remove adapter sequences, filter low-quality reads, and generate quality control metrics, and then aligned to each respective parent genome using STAR. Alignments are then filtered using samtools. For each sample, read coverage is calculated at each F1 SNP using bedtools intersect in strand-aware mode.</p>
+</div>
+<div id="setup" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Setup<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#setup" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="command-line-tools" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Command-line tools<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#command-line-tools" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="mamba" class="section level5 unnumbered hasAnchor">
+<h5>Mamba<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#mamba" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Several command-line tools are used in this tutorial. These are easily installed with the package manager <a href="https://mamba.readthedocs.io/en/latest/installation/mamba-installation.html">Mamba</a>. Follow the <a href="https://github.com/conda-forge/miniforge">Miniforge distribution</a> documentation for installation, then create a new environment called “AST-bioinfo” for installing the necessary tools.</p>
+<pre><code>mamba create --name AST-bioinfo</code></pre>
+</div>
+<div id="sra-tools" class="section level5 unnumbered hasAnchor">
+<h5>sra-tools<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#sra-tools" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>The SRA Toolkit and SDK from NCBI is a collection of tools and libraries for retrieving data in the INSDC Sequence Read Archives. <a href="https://github.com/ncbi/sra-tools">(Documentation)</a> <br /></p>
+<p>In this tutorial, sra-tools is used to retrieve <em>Apis mellifera</em> WGS &amp; mRNA-seq reads from SRA BioProject accession PRJNA1106847.</p>
+<pre><code>mamba install -n AST-bioinfo bioconda::sra-tools</code></pre>
+</div>
+<div id="fastp" class="section level5 unnumbered hasAnchor">
+<h5>fastp<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#fastp" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>fastp is a tool designed to provide fast all-in-one preprocessing for FastQ files. <a href="https://github.com/OpenGene/fastp">(Documentation)</a> <br /></p>
+<p>In this tutorial, fastp is used to trim any sequencing adapter contamination from the reads and assess quality control metrics.</p>
+<pre><code>mamba install -n AST-bioinfo bioconda::fastp</code></pre>
+</div>
+<div id="bwa" class="section level5 unnumbered hasAnchor">
+<h5>BWA<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#bwa" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>BWA is a software package for mapping DNA sequences against a large reference genome. <a href="https://github.com/lh3/bwa">(Documentation)</a> <br /></p>
+<p>In this tutorial, the BWA-MEM algorithm which is designed for Illumina sequence reads ranged from 70bp to a few megabases and is faster and more accurate than other alignment algorithms, is used for alignment of the F1 (parental) WGS reads to the <em>Apis mellifera</em> reference genome.</p>
+<pre><code>mamba install -n AST-bioinfo bioconda::bwa</code></pre>
+</div>
+<div id="star" class="section level5 unnumbered hasAnchor">
+<h5>STAR<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#star" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Spliced Transcripts Alignment to a Reference (STAR) is one of the best performing tools for alignment of mRNA-seq reads to a reference genome. <a href="https://github.com/alexdobin/STAR">(Documentation)</a> <br /></p>
+<p>In this tutorial, STAR is used to align the F2 mRNA-seq reads to their respective F1 reference genomes.</p>
+<pre><code>mamba install -n AST-bioinfo bioconda::star</code></pre>
+</div>
+<div id="freebayes" class="section level5 unnumbered hasAnchor">
+<h5>freebayes<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#freebayes" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>freebayes is a Bayesian genetic variant detector designed to find small polymorphisms, specifically SNPs (single-nucleotide polymorphisms), indels (insertions and deletions), MNPs (multi-nucleotide polymorphisms), and complex events (composite insertion and substitution events) smaller than the length of a short-read sequencing alignment. <a href="https://github.com/freebayes/freebayes">(Documentation)</a> <br /></p>
+<p>In this tutorial, freebayes is used to identify SNPs in the F1 WGS reads with reference to the <em>Apis mellifera</em> reference genome.</p>
+<pre><code>mamba install -n AST-bioinfo bioconda::freebayes</code></pre>
+</div>
+<div id="samtools" class="section level5 unnumbered hasAnchor">
+<h5>samtools<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#samtools" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>samtools is a suite of tools for manipulating next-generation sequencing data. <a href="https://www.htslib.org/">(Documentation)</a> <br /></p>
+<p>In this tutorial, samtools is used to process alignments produced by BWA-MEM &amp; STAR and SNP calls produced by freebayes.</p>
+<pre><code>mamba install -n AST-bioinfo bioconda::samtools</code></pre>
+</div>
+<div id="bedtools" class="section level5 unnumbered hasAnchor">
+<h5>BEDTools<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#bedtools" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>The bedtools utilities are a swiss-army knife of tools for a wide-range of genomics analysis tasks. The most widely-used tools enable genome arithmetic: that is, set theory on the genome. For example, bedtools allows one to intersect, merge, count, complement, and shuffle genomic intervals from multiple files in widely-used genomic file formats such as BAM, BED, GFF/GTF, VCF. <a href="https://github.com/arq5x/bedtools2">(Documentation)</a> <br /></p>
+<p>In this tutorial, BEDTools is used to identify SNPs that differ between F1 parents and to annotate the <em>Apis mellifera</em> transcript annotations with the positions of these SNPs.</p>
+<pre><code>mamba install -n AST-bioinfo bioconda::bedtools</code></pre>
+</div>
+<div id="vcftools" class="section level5 unnumbered hasAnchor">
+<h5>VCFtools<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#vcftools" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>VCFtools is a program package designed for working with VCFs. <a href="https://vcftools.sourceforge.net/">(Documentation)</a> <br /></p>
+<p>In this tutorial, VCFtools is used to filter SNPs called by freebayes.</p>
+<pre><code>mamba install -n AST-bioinfo bioconda::vcftools</code></pre>
+</div>
+<div id="gatk" class="section level5 unnumbered hasAnchor">
+<h5>GATK<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#gatk" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>The Genome Analysis Toolkit is a collection of command-line tools for analyzing high-throughput sequencing data with a primary focus on variant discovery. <a href="https://gatk.broadinstitute.org/hc/en-us">(Documentation)</a> <br /></p>
+<p>In this tutorial, the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037052812-MarkDuplicates-Picard">MarkDuplicates</a> tool is used to filter duplicate WGS reads, and the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037594571-FastaAlternateReferenceMaker">FastaAlternateReferenceMaker</a> tool is used to integrate F1 SNPs into the <em>Apis mellifera</em> reference genome to generate parental reference genomes.</p>
+<pre><code>mamba install -n AST-bioinfo bioconda::gatk</code></pre>
+</div>
+<div id="fastqc" class="section level5 unnumbered hasAnchor">
+<h5>FastQC<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#fastqc" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>FastQC aims to provide a simple way to do some quality control checks on raw sequence data coming from high throughput sequencing pipelines. It provides a modular set of analyses which you can use to give a quick impression of whether your data has any problems of which you should be aware before doing any further analysis. <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/">(Documentation)</a> <br /></p>
+<p>In this tutorial, FastQC is used for an initial quality control check of the sequencing reads prior to pre-processing steps.</p>
+<pre><code>mamba install -n AST-bioinfo bioconda::fastqc</code></pre>
+</div>
+<div id="multiqc" class="section level5 unnumbered hasAnchor">
+<h5>MultiQC<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#multiqc" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>MultiQC searches a given directory for analysis logs and compiles a HTML report. It’s a general use tool, perfect for summarising the output from numerous bioinformatics tools. <a href="https://multiqc.info/">(Documentation)</a> <br /></p>
+<p>In this tutorial, MultiQC is used to aggregate reports from FastQC and fastp to assess quality control metrics of the sequencing reads before and after filtering.</p>
+<pre><code>mamba install -n AST-bioinfo bioconda::multiqc</code></pre>
+</div>
+<div id="activate-mamba-environment" class="section level5 unnumbered hasAnchor">
+<h5>Activate mamba environment<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#activate-mamba-environment" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Upon opening a new terminal, you must activate your mamba environment to access these tools:</p>
+<pre><code>mamba activate AST-bioinfo</code></pre>
+</div>
+</div>
+<div id="project-directory-structure" class="section level3 unnumbered hasAnchor">
+<h3>Project directory structure<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#project-directory-structure" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>It is important to create a cohesive and consistent directory structure for your bioinformatics projects. For this tutorial, create these directories with <code>mkdir</code>:</p>
+<pre><code>AST-tutorial
+└───RAW
+│   └───WGS
+│   └───mRNA
+└───TRIM
+│   └───WGS
+│   └───mRNA
+└───ALIGN_GENOME
+│   └───UNFILTERED
+│   └───FILTERED
+└───VARIANTS
+│   └───UNFILTERED
+│   └───FILTERED
+└───ANALYSIS
+│   └───INTERMEDIATE
+│   └───RESULTS
+└───ANALYSIS_SETS
+└───PARENT_GENOMES
+└───ALIGN_PARENT_GENOMES
+│   └───UNFILTERED
+│   └───FILTERED
+└───COUNT
+└───INDEX
+└───SCRIPTS
+└───REPORTS
+│   └───WGS
+│   └───mRNA</code></pre>
+</div>
+<div id="amel_hav3.1-reference-genome-assembly-and-annotation-files" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Amel_HAv3.1 reference genome assembly and annotation files<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#amel_hav3.1-reference-genome-assembly-and-annotation-files" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Retrieve the <a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_003254395.2/">RefSeq assembly files from NCBI</a> via ftp.</p>
+<pre><code>DIR_INDEX=&quot;AST-tutorial/INDEX&quot;
+
+wget -O ${DIR_INDEX}/Amel_HAv3.1.fasta.gz https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/003/254/395/GCF_003254395.2_Amel_HAv3.1/GCF_003254395.2_Amel_HAv3.1_genomic.fna.gz
+
+gunzip ${DIR_INDEX}/Amel_HAv3.1.fasta.gz
+
+wget -O ${DIR_INDEX}/Amel_HAv3.1.gff.gz https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/003/254/395/GCF_003254395.2_Amel_HAv3.1/GCF_003254395.2_Amel_HAv3.1_genomic.gff.gz
+
+gunzip ${DIR_INDEX}/Amel_HAv3.1.gff.gz
+
+wget -O ${DIR_INDEX}/Amel_HAv3.1.gff.gz https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/003/254/395/GCF_003254395.2_Amel_HAv3.1/GCF_003254395.2_Amel_HAv3.1_genomic.gtf.gz
+
+gunzip ${DIR_INDEX}/Amel_HAv3.1.gtf.gz</code></pre>
+</div>
+<div id="a-note-on-parallel-processing-in-high-performance-computing-clusters" class="section level3 hasAnchor" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> A note on parallel processing in high performance computing clusters<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#a-note-on-parallel-processing-in-high-performance-computing-clusters" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The code chunks throughout the tutorial are written so as to run each <code>FILE</code> in a <code>FILES</code> array through serial loops. If you are running this tutorial in a high-performance computing (HPC) cluster with a batch submission system (e.g., SLURM on Penn State <a href="https://www.icds.psu.edu/access-roar-and-roar-collab-online/">ROAR Collab</a>), you can instead submit a “parent” job that submits individual “child” jobs for each file. For example:</p>
+<div id="parent-job" class="section level5 unnumbered hasAnchor">
+<h5>Parent job<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#parent-job" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<pre><code>#!/bin/bash
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --time=0:10:00
+#SBATCH --mem-per-cpu=1gb
+#SBATCH --partition=open
+
+SCRIPTS=&quot;path/to/SCRIPTS&quot;
+THREADS=4
+DIR_OUT=&quot;path/to/OUTPUT_DIRECTORY&quot;
+DIR_RAW=&quot;path/to/RAW_DATA&quot;
+
+FILES=(FILE1 FILE2 etc...)
+
+for FILE in &quot;${FILES[@]}&quot;
+do
+  sbatch ${SCRIPTS}/script_to_run.sh ${FILE} ${THREADS} ${DIR_OUT} ${DIR_RAW}
+done</code></pre>
+</div>
+<div id="child-job" class="section level5 unnumbered hasAnchor">
+<h5>Child job<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#child-job" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<pre><code>#!/bin/bash
+#SBATCH --nodes=1
+#SBATCH --ntasks=8
+#SBATCH --time=8:00:00
+#SBATCH --mem-per-cpu=8gb
+#SBATCH --partition=open 
+
+# To source miniconda
+source /storage/home/stb5321/work/miniconda3/etc/profile.d/conda.sh
+
+# Assign arguments from sbatch command called in parent script to variables
+FILE=&quot;$1&quot;
+THREADS=&quot;$2&quot;
+DIR_OUT=&quot;$3&quot;
+DIR_RAW=&quot;$4&quot;
+
+commandX -t ${THREADS} \
+  ${DIR_RAW}/${FILE}_1.fastq ${DIR_RAW}/${FILE}_2.fastq \
+  -o ${DIR_OUT}/${FILE}.out</code></pre>
+<p>Note that depending on how your HPC is set up, you may need to source your conda installation in each child script. For more information on the <code>#SBATCH</code> commands in the headers of these scripts, see the <a href="https://slurm.schedmd.com/documentation.html">Slurm Workflow Manager documentation</a>. Specifically for PSU, see the <a href="https://www.icds.psu.edu/submitting-jobs-on-roar-collab/">ROAR Collab documentation</a>.</p>
+</div>
+</div>
+</div>
+<div id="generation-of-f1-genomes-and-transcriptomes" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Generation of F1 genomes and transcriptomes<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#generation-of-f1-genomes-and-transcriptomes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="wgs-read-pre-processing" class="section level3 hasAnchor" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> WGS read pre-processing<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#wgs-read-pre-processing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="retrieve-wgs-reads-from-sra" class="section level4 hasAnchor" number="2.3.1.1">
+<h4><span class="header-section-number">2.3.1.1</span> Retrieve WGS reads from SRA<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#retrieve-wgs-reads-from-sra" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<table>
+<thead>
+<tr class="header">
+<th>SRA</th>
+<th>Cross</th>
+<th>Parent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>SRR28865844</td>
+<td>A</td>
+<td>Male</td>
+</tr>
+<tr class="even">
+<td>SRR28865843</td>
+<td>A</td>
+<td>Female</td>
+</tr>
+<tr class="odd">
+<td>SRR28865842</td>
+<td>B</td>
+<td>Male</td>
+</tr>
+<tr class="even">
+<td>SRR28865841</td>
+<td>B</td>
+<td>Female</td>
+</tr>
+</tbody>
+</table>
+<pre><code>DIR_RAW=&quot;AST-tutorial/RAW/WGS&quot;
+
+FILES=(SRR28865844 SRR28865843 SRR28865842 SRR28865841)
+
+for FILE in &quot;${FILES[@]}&quot;
+do
+  # Retrieve the .sra file
+  prefetch -O ${DIR_RAW} ${FILE}
+  # Extract .fastq from .sra
+  fasterq-dump -O ${DIR_RAW} ${DIR_RAW}/${FILE}.sra
+  # Delete the .sra file
+  rm ${DIR_RAW}/{FILE}.sra
+done</code></pre>
+</div>
+<div id="assess-raw-quality-control-metrics" class="section level4 hasAnchor" number="2.3.1.2">
+<h4><span class="header-section-number">2.3.1.2</span> Assess raw quality control metrics<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#assess-raw-quality-control-metrics" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Here, FastQC reports for each library are generated. These can be viewed individually, or aggregated into a single report with MultiQC. This tutorial will demonstrate the latter approach.</p>
+<pre><code>DIR_RAW=&quot;AST-tutorial/RAW/WGS&quot;
+DIR_REPORTS=&quot;AST-tutorial/REPORTS/WGS&quot;
+THREADS=&quot;integer number of threads for parallel processing, usually 4 is fine&quot;
+
+FILES=(SRR28865844 SRR28865843 SRR28865842 SRR28865841)
+
+for FILE in &quot;${FILES[@]}&quot;
+do
+  fastqc \
+   -t ${THREADS} \
+   ${DIR_RAW}/${FILE}_1.fastq ${DIR_RAW}/${FILE}_2.fastq \
+   --outdir ${DIR_REPORTS}
+done</code></pre>
+</div>
+<div id="trim-and-filter-reads" class="section level4 hasAnchor" number="2.3.1.3">
+<h4><span class="header-section-number">2.3.1.3</span> Trim and filter reads<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#trim-and-filter-reads" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>fastp will detect common sequencing adapters and trim them from the ends of sequencing reads, in addition to filter low-quality reads (where the average base call quality score is below some threshold and/or where the read is less than <em>n</em> nucleotides in length). Here, run fastp using the default settings to clean up the reads.</p>
+<pre><code>DIR_RAW=&quot;AST-tutorial/RAW/WGS&quot;
+DIR_TRIM=&quot;AST-tutorial/TRIM/WGS&quot;
+DIR_REPORTS=&quot;AST-tutorial/REPORTS/WGS&quot;
+THREADS=&quot;integer number of threads for parallel processing, usually 8 is fine&quot;
+
+FILES=(SRR28865844 SRR28865843 SRR28865842 SRR28865841)
+
+for FILE in &quot;${FILES[@]}&quot;
+do
+  fastp \
+   -w ${THREADS} \
+   -i ${DIR_RAW}/${FILE}_1.fastq -I ${DIR_RAW}/${FILE}_2.fastq \
+   -o ${DIR_TRIM}/${FILE}_1.fastq -O ${DIR_TRIM}/${FILE}_2.fastq \
+   -j ${DIR_REPORTS}/${FILE}_fastp.json
+done</code></pre>
+</div>
+<div id="aggregate-qc-reports-with-multiqc" class="section level4 hasAnchor" number="2.3.1.4">
+<h4><span class="header-section-number">2.3.1.4</span> Aggregate QC reports with MultiQC<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#aggregate-qc-reports-with-multiqc" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Quality control metrics of the WGS reads before and after trimming/filtering can be visualized in one html report. <a href="https://hbctraining.github.io/Intro-to-rnaseq-hpc-salmon/lessons/qc_fastqc_assessment.html">Read more about interpreting NGS QC metrics from these reports here</a> from the Harvard Chan Bioinformatics Core. <a href="https://seantbresnahan.com/IGC-CD-SM/resources/reports/larvae_WGS_multiqc_report.html">An example MultiQC report of WGS reads post-trimming can be found here</a>.</p>
+<pre><code>DIR_REPORTS=&quot;AST-tutorial/REPORTS/WGS&quot;
+multiqc ${DIR_REPORTS}/. \
+ -o ${DIR_REPORTS} \
+ -n WGS.html</code></pre>
+</div>
+</div>
+<div id="wgs-read-alignment-and-post-processing" class="section level3 hasAnchor" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> WGS read alignment and post-processing<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#wgs-read-alignment-and-post-processing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="generate-bwa-alignment-index-for-the-amel_hav3.1-reference-genome-assembly" class="section level4 hasAnchor" number="2.3.2.1">
+<h4><span class="header-section-number">2.3.2.1</span> Generate BWA alignment index for the Amel_HAv3.1 reference genome assembly<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#generate-bwa-alignment-index-for-the-amel_hav3.1-reference-genome-assembly" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<pre><code>DIR_INDEX=&quot;AST-tutorial/INDEX&quot;
+bwa index ${DIR_INDEX}/Amel_HAv3.1.fasta</code></pre>
+</div>
+<div id="align-reads-to-the-amel_hav3.1-reference-genome-assembly-with-bwa-mem" class="section level4 hasAnchor" number="2.3.2.2">
+<h4><span class="header-section-number">2.3.2.2</span> Align reads to the Amel_HAv3.1 reference genome assembly with BWA-MEM<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#align-reads-to-the-amel_hav3.1-reference-genome-assembly-with-bwa-mem" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<pre><code>DIR_TRIM=&quot;AST-tutorial/TRIM/WGS&quot;
+DIR_INDEX=&quot;AST-tutorial/INDEX&quot;
+DIR_ALIGN=&quot;AST-tutorial/ALIGN_GENOME/UNFILTERED&quot;
+THREADS=&quot;integer number of threads for parallel processing, usually 8 is fine&quot;
+
+FILES=(SRR28865844 SRR28865843 SRR28865842 SRR28865841)
+
+for FILE in &quot;${FILES[@]}&quot;
+do
+  bwa mem \
+   -t ${THREADS} \
+   ${DIR_INDEX}/Amel_HAv3.1.fasta \
+   ${FILE}_1.fastq ${FILE}_2.fastq \
+   &gt; ${DIR_ALIGN}/${FILE}.sam
+done</code></pre>
+</div>
+<div id="sort-and-filter-alignments-with-samtools-and-filter-duplicates-with-gatk" class="section level4 hasAnchor" number="2.3.2.3">
+<h4><span class="header-section-number">2.3.2.3</span> Sort and filter alignments with samtools and filter duplicates with GATK<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#sort-and-filter-alignments-with-samtools-and-filter-duplicates-with-gatk" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Here, alignments are coordinate sorted and filtered to remove unmapped reads, reads with unmapped mates, secondary, supplementary, and duplicate alignments (<a href="https://broadinstitute.github.io/picard/explain-flags.html">see here for information on SAM flags</a>). These are important to remove for variant calling steps as they can contribute to both false positive and negative calls. For more information about these practices, see the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035535912-Data-pre-processing-for-variant-discovery">GATK best practices workflow for variant discovery</a> and Koboldt (2020), <em>Genome Med</em>, <a href="https://doi.org/10.1186/s13073-020-00791-w">https://doi.org/10.1186/s13073-020-00791-w</a>.</p>
+<pre><code>DIR_ALIGN=&quot;AST-tutorial/ALIGN_GENOME/UNFILTERED&quot;
+DIR_ALIGN_FILTERED=&quot;AST-tutorial/ALIGN_GENOME/FILTERED&quot;
+DIR_REPORTS=&quot;AST-tutorial/REPORTS/WGS&quot;
+THREADS=&quot;integer number of threads for parallel processing, usually 6 is fine&quot;
+
+FILES=(SRR28865844 SRR28865843 SRR28865842 SRR28865841)
+
+for FILE in &quot;${FILES[@]}&quot;
+do
+  # Remove alignments with any flags in 2316
+  # Convert SAM to BAM and sort using 4Gb memory per thread
+  samtools view \
+   -@ ${THREADS} -F 2316 -O bam ${DIR_ALIGN}/${FILE}.sam \
+   | samtools sort -@ ${THREADS} -m 4g -O bam - \
+   &gt; ${DIR_ALIGN}/${FILE}.bam
+
+  # Remove duplicates and sort by coordinate
+  gatk MarkDuplicates \
+   -I ${DIR_ALIGN}/${FILE}.bam \
+   -O ${DIR_ALIGN_FILTERED}/${FILE}_rmvdup.bam \
+   -M ${DIR_REPORTS}/${FILE}_rmvdup_metrics.txt \
+   --ASSUME_SORT_ORDER coordinate \
+   --REMOVE_DUPLICATES true \
+   --ADD_PG_TAG_TO_READS false
+done</code></pre>
+</div>
+</div>
+<div id="variant-discovery-and-filtration" class="section level3 hasAnchor" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> Variant discovery and filtration<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#variant-discovery-and-filtration" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Here, variants (SNPs, MNPs, &amp; indels) are identified using freebayes to account for differences in ploidy between <code>DIPLOID</code> and <code>HAPLOID</code> samples. After variant discovery, the variant call files (VCFs) are then subset to homozygous SNPs and filtered by quality (<code>QUAL</code>), minimum depth of coverage (<code>MINDP</code>) and maximum depth of coverage (<code>MAXDP</code>) using samtools and VCFtools, compressed with bgzip and indexed with tabix (samtools). For more information about these practices, <a href="https://speciationgenomics.github.io/filtering_vcfs/">see this how-to guide on Filtering and handling VCFs for population genomics</a> from Mark Ravinet &amp; Joana Meier.</p>
+<pre><code>QUAL=&quot;an integer, 30 is ideal&quot;
+MINDP=&quot;an integer, usually 10 is fine&quot;
+MAXDP=&quot;an integer, usually 50 is fine&quot;
+DIR_ALIGN_FILTERED=&quot;AST-tutorial/ALIGN_GENOME/FILTERED&quot;
+DIR_VARIANTS=&quot;AST-tutorial/VARIANTS/UNFILTERED&quot;
+DIR_VARIANTS_FILTERED=&quot;AST-tutorial/VARIANTS/FILTERED&quot;
+DIR_INDEX=&quot;AST-tutorial/INDEX&quot;
+
+DIPLOID=(SRR28865843 SRR28865841)
+
+for FILE in &quot;${DIPLOID[@]}&quot;
+do
+  freebayes \
+   -p 2 -f ${DIR_INDEX}/Amel_HAv3.1.fasta \
+   ${DIR_ALIGN_FILTERED}/${FILE}.bam &gt; ${DIR_VARIANTS}/${FILE}.vcf
+done
+
+HAPLOID=(SRR28865844 SRR28865842)
+
+for FILE in &quot;${HAPLOID[@]}&quot;
+do
+  freebayes \
+   -p 1 -f ${DIR_INDEX}/Amel_HAv3.1.fasta \
+   ${DIR_ALIGN_FILTERED}/${FILE}.bam &gt; ${DIR_VARIANTS}/${FILE}.vcf
+done
+
+FILES=(SRR28865844 SRR28865843 SRR28865842 SRR28865841)
+
+for FILE in &quot;${FILES[@]}&quot;
+do
+  # Remove variants that do not meet criteria
+  # Retain only high-quality homozygous SNPs
+  vcftools \
+   --vcf ${DIR_VARIANTS}/${FILE}.vcf \
+   --minQ ${QUAL} \
+   --min-meanDP ${MINDP} --max-meanDP ${MAXDP} \
+   --minDP ${MINDP} --maxDP ${MAXDP} \
+   --recode --stdout \
+   | bcftools filter -e &#39;GT=&quot;het&quot;&#39; - \
+   | bcftools filter -i &#39;TYPE=&quot;snp&quot;&#39; - \
+   &gt; ${DIR_VARIANTS_FILTERED}/${FILE}_homozygous_snps.vcf
+   
+  # Compress
+  bgzip -c ${DIR_VARIANTS_FILTERED}/${FILE}_homozygous_snps.vcf \
+   &gt; ${DIR_VARIANTS_FILTERED}/${FILE}_homozygous_snps.vcf.gz
+  
+  # Index the compressed file
+  tabix -p vcf ${DIR_VARIANTS_FILTERED}/${FILE}_homozygous_snps.vcf.gz
+done</code></pre>
+</div>
+<div id="genome-and-transcriptome-construction" class="section level3 hasAnchor" number="2.3.4">
+<h3><span class="header-section-number">2.3.4</span> Genome and transcriptome construction<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#genome-and-transcriptome-construction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="construct-f1-genomes-with-gatk-fastaalternatereferencemaker" class="section level4 hasAnchor" number="2.3.4.1">
+<h4><span class="header-section-number">2.3.4.1</span> Construct F1 genomes with GATK FastaAlternateReferenceMaker<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#construct-f1-genomes-with-gatk-fastaalternatereferencemaker" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>First, create a “sequence dictionary” from the Amel_HAv3.1 reference genome for use with GATK. Then, integrate the high-quality homozygous SNPs into the Amel_HAv3.1 reference genome for each parent to generate individual genomes. Finally, reformat the numeric headers of the F1 genome .fasta files produced by GATK to match the nucleotide accessions in the headers of the Amel_HAv3.1 reference genome fasta file.</p>
+<pre><code>DIR_VARIANTS_FILTERED=&quot;AST-tutorial/VARIANTS/FILTERED&quot;
+DIR_INDEX=&quot;AST-tutorial/INDEX&quot;
+DIR_PARENT_GENOMES=&quot;AST-tutorial/PARENT_GENOMES&quot;
+
+gatk4 CreateSequenceDictionary \
+ -R ${DIR_INDEX}/Amel_HAv3.1.fasta \
+ -O ${DIR_INDEX}/Amel_HAv3.1.dict
+
+FILES=(SRR28865844 SRR28865843 SRR28865842 SRR28865841)
+
+for FILE in &quot;${FILES[@]}&quot;
+do
+  gatk4 FastaAlternateReferenceMaker \
+   -R ${DIR_INDEX}/Amel_HAv3.1.fasta \
+   -O ${DIR_PARENT_GENOMES}/${FILE}.fasta \
+   -V ${DIR_VARIANTS_FILTERED}/${FILE}_homozygous_snps.vcf.gz
+done
+
+# Get all sequence headers from one of the F1 genomes (= &quot;bad&quot;&quot;)
+grep &quot;&gt;&quot; ${DIR_PARENT_GENOMES}/SRR28865844.fasta \
+ | sed &#39;s/&gt;//g&#39; &gt; bad_headers.txt
+
+# Get all sequence headers from the reference genome (= &quot;good&quot;&quot;)
+grep &quot;&gt;&quot; ${DIR_INDEX}/Amel_HAv3.1.fasta \
+ | sed &#39;s/\s.*$//&#39; | sed &#39;s/&gt;//g&#39; &gt; ${DIR_INDEX}/good_headers.txt
+
+# Combine the &quot;bad&quot; and &quot;good&quot; headers into one .tsv
+paste -d&quot;\t&quot; ${DIR_INDEX}/bad_headers.txt ${DIR_INDEX}/good_headers.txt \
+ &gt; ${DIR_INDEX}/replace_headers.tsv
+
+for FILE in &quot;${FILES[@]}&quot;
+do
+  # Use replace_headers.tsv as a lookup table for replacement
+  awk &#39;FNR==NR{a[&quot;&gt;&quot;$1]=$2;next}$1 in a{sub(/&gt;/,&quot;&gt;&quot;a[$1]&quot;|&quot;,$1)}1&#39; \
+   ${DIR_INDEX}/replace_headers.tsv ${DIR_PARENT_GENOMES}/${FILE}.fasta \
+   | sed &#39;s/:.*//&#39; &gt; ${DIR_PARENT_GENOMES}/${FILE}_fixed.fasta
+done</code></pre>
+<p>This will replace the sequential numeric sequence headers in the resultant F1 genome .fasta files produced by GATK, e.g., <br /></p>
+<pre><code>&gt;1
+ATCCTCCACCT....
+&gt;2 
+GGGAATTGCCA....</code></pre>
+<p>With the nucleotide accessions in the sequence headers of the Amel_HAv3.1 reference genome fasta file, e.g., <br /></p>
+<pre><code>&gt;NC_037638.1
+ATCCTCCACCT....
+&gt;NC_037639.1
+GGGAATTGCCA....</code></pre>
+<p>This step is critical for the final <a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#mrna-seq-alignment-post-processing-and-allele-specific-read-counting">mRNA-seq allele-specific read counting step</a> as the chromosome field of the annotation file used to assign counts to transcripts must match the chromosome field of the alignment files used for counting.</p>
+</div>
+<div id="construct-f1-transcriptomes-for-star" class="section level4 hasAnchor" number="2.3.4.2">
+<h4><span class="header-section-number">2.3.4.2</span> Construct F1 transcriptomes for STAR<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#construct-f1-transcriptomes-for-star" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<pre><code>THREADS=&quot;integer number of threads for parallel processing, usually 8 is fine&quot;
+DIR_INDEX=&quot;AST-tutorial/INDEX&quot;
+DIR_PARENT_GENOMES=&quot;AST-tutorial/PARENT_GENOMES&quot;
+
+FILES=(SRR28865844 SRR28865843 SRR28865842 SRR28865841)
+
+for FILE in &quot;${FILES[@]}&quot;
+do
+  STAR \
+   --runThreadN ${THREADS} \
+   --runMode genomeGenerate \
+   --genomeDir ${DIR_PARENT_GENOMES}/${FILE} \
+   --genomeFastaFiles ${DIR_PARENT_GENOMES}/${FILE}_fixed.fasta \
+   --sjdbGTFfile ${DIR_INDEX}/Amel_HAv3.1.gtf
+done</code></pre>
+</div>
+<div id="annotate-f1-snps-within-genes" class="section level4 hasAnchor" number="2.3.4.3">
+<h4><span class="header-section-number">2.3.4.3</span> Annotate F1 SNPs within genes<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#annotate-f1-snps-within-genes" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Here, the high-quality homozygous SNPs for each reciprocal cross are intersected to find those that are unique to each parent but shared between the crosses. For example, consider these hypothetical SNPs reported by a variant calling tool:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Parent</th>
+<th>Cross</th>
+<th>Chr</th>
+<th>Pos</th>
+<th>Ref</th>
+<th>Alt</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Male</td>
+<td>A</td>
+<td>1</td>
+<td>100</td>
+<td>A</td>
+<td>T</td>
+</tr>
+<tr class="even">
+<td>Female</td>
+<td>B</td>
+<td>1</td>
+<td>100</td>
+<td>A</td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
+<p>In this example, in Cross A, the “A&gt;T” SNP is present in the male parent but absent in the female parent (i.e., the “Alt” allele for the female parent is the same as the “Ref” allele and thus was not reported as a SNP). In Cross B, this SNP is present in the female parent but absent in the male parent. Thus, this SNP is unique to the parents of each cross, but shared between the crosses of the reciprocal cross. Therefore, this SNP can be used to differentiate reads originating from each parent in each cross, allowing for assessment of genotype-specific or parent-specific bias within the reciprocal cross design.</p>
+<div id="get-gene-annotations" class="section level5 unnumbered hasAnchor">
+<h5>Get gene annotations<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#get-gene-annotations" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>First, subset the Amel_HAv3.1 reference genome feature file (gff) to gene features, and modify column 9 (the info column) to keep only the RefSeq GeneID (these will be used in all downstream analyses).</p>
+<pre><code>DIR_INDEX=&quot;AST-tutorial/INDEX&quot;
+DIR_VARIANTS=&quot;AST-tutorial/VARIANTS/UNFILTERED&quot;
+DIR_VARIANTS_FILTERED=&quot;AST-tutorial/VARIANTS/FILTERED&quot;
+
+# Subset Amel_HAv3.1.gff to rows with &quot;gene&quot;&quot; in column 3
+# Print columns 1-8
+awk &#39;$3 == &quot;gene&quot; { print $0 }&#39; ${DIR_INDEX}/Amel_HAv3.1.gff \
+ | awk -v OFS=&quot;\t&quot; &#39;{print $1, $2, $3, $4, $5, $6, $7, $8}&#39; \
+ &gt; ${DIR_INDEX}/Amel_HAv3.1_genes.txt
+
+# Extract the &quot;GeneID&quot; from column 9
+awk &#39;$3 == &quot;gene&quot; { print $0 }&#39; ${DIR_INDEX}/Amel_HAv3.1.gff \
+ | awk &#39;{print $9}&#39; \
+ | grep -o &#39;GeneID[^\s]*&#39; \
+ | cut -d&#39;:&#39; -f2 \
+ | cut -d&#39;;&#39; -f1 \
+ | cut -d&#39;,&#39; -f1 \
+ | sed -e &#39;s/^/LOC/&#39; \
+ &gt; ${DIR_INDEX}/Amel_HAv3.1_geneIDs.txt
+
+# Combine the two files to create a new gene-only .gff 
+paste -d&#39;\t&#39; ${DIR_INDEX}/Amel_HAv3.1_genes.txt \
+${DIR_INDEX}/Amel_HAv3.1_geneIDs.txt \
+&gt; ${DIR_INDEX}/Amel_HAv3.1_genes.gff3</code></pre>
+<p>The resultant <code>Amel_HAv3.1_genes.gff3</code> file should look like this:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td>NC_037638.1</td>
+<td>Gnomon</td>
+<td>gene</td>
+<td>9273</td>
+<td>12174</td>
+<td>.</td>
+<td>-</td>
+<td>.</td>
+<td>LOC551580</td>
+</tr>
+<tr class="even">
+<td>NC_037638.1</td>
+<td>Gnomon</td>
+<td>gene</td>
+<td>10792</td>
+<td>17180</td>
+<td>.</td>
+<td>+</td>
+<td>.</td>
+<td>LOC551555</td>
+</tr>
+<tr class="odd">
+<td>NC_037638.1</td>
+<td>Gnomon</td>
+<td>gene</td>
+<td>17090</td>
+<td>23457</td>
+<td>.</td>
+<td>-</td>
+<td>.</td>
+<td>LOC726347</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="identify-informative-f1-snps" class="section level5 unnumbered hasAnchor">
+<h5>Identify informative F1 SNPs<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#identify-informative-f1-snps" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Next, identify the informative SNPs by taking the difference of each respective parental SNP call set (i.e., SNPs unique to each parent) and finding the intersection between crosses.</p>
+<pre><code>DIR_VARIANTS_FILTERED=&quot;AST-tutorial/VARIANTS/FILTERED&quot;
+DIR_ANALYSIS=&quot;AST-tutorial/ANALYSIS_SETS&quot;
+CrossApat=&quot;SRR28865844&quot;
+CrossAmat=&quot;SRR28865843&quot;
+CrossBpat=&quot;SRR28865842&quot;
+CrossBmat=&quot;SRR28865841&quot;
+
+# Get SNPs in -a that are not in -b
+bedtools intersect -header -v \
+ -a ${DIR_VARIANTS_FILTERED}/${CrossApat}_homozygous_snps.vcf \
+ -b ${DIR_VARIANTS_FILTERED}/${CrossAmat}_homozygous_snps.vcf \
+ &gt; ${DIR_VARIANTS_FILTERED}/${CrossApat}_homozygous_snps_outer.vcf
+
+bedtools intersect -header -v \
+ -a ${DIR_VARIANTS_FILTERED}/${CrossAmat}_homozygous_snps.vcf \
+ -b ${DIR_VARIANTS_FILTERED}/${CrossApat}_homozygous_snps.vcf \
+ &gt; ${DIR_VARIANTS_FILTERED}/${CrossAmat}_homozygous_snps_outer.vcf
+
+bedtools intersect -header -v \
+ -a ${DIR_VARIANTS_FILTERED}/${CrossBpat}_homozygous_snps.vcf \
+ -b ${DIR_VARIANTS_FILTERED}/${CrossBmat}_homozygous_snps.vcf \
+ &gt; ${DIR_VARIANTS_FILTERED}/${CrossBpat}_homozygous_snps_outer.vcf
+
+bedtools intersect -header -v \
+ -a ${DIR_VARIANTS_FILTERED}/${CrossBmat}_homozygous_snps.vcf \
+ -b ${DIR_VARIANTS_FILTERED}/${CrossBpat}_homozygous_snps.vcf \
+ &gt; ${DIR_VARIANTS_FILTERED}/${CrossBmat}_homozygous_snps_outer.vcf
+
+# Combine Cross A SNPs from above to single .vcf
+grep -v &#39;^#&#39; \
+ ${DIR_VARIANTS_FILTERED}/${CrossApat}_homozygous_snps_outer.vcf \
+ | cat ${DIR_VARIANTS_FILTERED}/${CrossAmat}_homozygous_snps_outer.vcf - \
+ &gt; ${DIR_VARIANTS_FILTERED}/CrossA_homozygous_snps_outer.vcf
+
+# Compress the combined Cross A .vcf
+bgzip -c \
+ ${DIR_VARIANTS_FILTERED}/CrossA_homozygous_snps_outer.vcf \
+ &gt; ${DIR_VARIANTS_FILTERED}/CrossA_homozygous_snps_outer.vcf.gz
+
+# Combine Cross B SNPs from above to single .vcf
+grep -v &#39;^#&#39; \
+ ${DIR_VARIANTS_FILTERED}/${CrossBpat}_homozygous_snps_outer.vcf \
+ | cat ${DIR_VARIANTS_FILTERED}/${CrossBmat}_homozygous_snps_outer.vcf - \
+ &gt; ${DIR_VARIANTS_FILTERED}/CrossB_homozygous_snps_outer.vcf
+
+# Compress the combined Cross B .vcf
+bgzip -c \
+ ${DIR_VARIANTS_FILTERED}/CrossB_homozygous_snps_outer.vcf \
+ &gt; ${DIR_VARIANTS_FILTERED}/CrossB_homozygous_snps_outer.vcf.gz
+
+# Intersect the combined Cross A &amp; Cross B SNPs
+bedtools intersect -header -u \
+ -a ${DIR_VARIANTS_FILTERED}/CrossA_homozygous_snps_outer.vcf.gz \
+ -b ${DIR_VARIANTS_FILTERED}/CrossB_homozygous_snps_outer.vcf.gz \
+ &gt; ${DIR_ANALYSIS}/Analysis_SNP_Set.vcf
+
+# Create a basic .bed file from the intersected SNPs
+# Use the genomic position as the start and end coordinates
+# Label each variant sequentially (i.e., SNP_1, SNP_2, etc.)
+grep -v &#39;^#&#39; ${DIR_ANALYSIS}/Analysis_SNP_Set.vcf \
+ | awk -v OFS=&quot;\t&quot; &#39;{print $1, $2, $2}&#39; \
+ | awk -v OFS=&quot;\t&quot; &#39;$4=(FNR FS $4)&#39; \
+ | awk -v OFS=&quot;\t&quot; &#39;{print $1, $2, $3, &quot;snp_&quot;$4}&#39; \
+ &gt; ${DIR_ANALYSIS}/Analysis_SNP_Set.bed</code></pre>
+<p>The resultant <code>Analysis_SNP_Set.bed</code> file should look like this:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td>NC_037638.1</td>
+<td>155356</td>
+<td>155356</td>
+<td>snp_1</td>
+</tr>
+<tr class="even">
+<td>NC_037638.1</td>
+<td>174473</td>
+<td>174473</td>
+<td>snp_2</td>
+</tr>
+<tr class="odd">
+<td>NC_037638.1</td>
+<td>183350</td>
+<td>183350</td>
+<td>snp_3</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="intersect-informative-f1-snps-with-genes" class="section level5 unnumbered hasAnchor">
+<h5>Intersect informative F1 SNPs with genes<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#intersect-informative-f1-snps-with-genes" class="anchor-section" aria-label="Anchor link to header"></a></h5>
+<p>Finally, annotate the genes with the positions of informative F1 SNPs. In Section 3, these SNPs will be subset to those within the longest transcript for each gene. Mitochondrial genes (on the chromosome with nucleotide accession “NC_001566.1”) are filtered, as these are innapropriate for assessing parent-of-origin effects (as all mitochondrial genes will be maternally expressed).</p>
+<pre><code>DIR_ANALYSIS=&quot;AST-tutorial/ANALYSIS_SETS&quot;
+DIR_INDEX=&quot;AST-tutorial/INDEX&quot;
+
+# Intersect the gene annotations and SNP set
+# Combine the SNP_ID and GeneIDs in column 4 (name) as SNP_ID:GeneID
+bedtools intersect -wb \
+ -a ${DIR_INDEX}/Amel_HAv3.1_genes.gff3 \
+ -b ${DIR_ANALYSIS}/Analysis_SNP_Set.bed \
+ | awk -v OFS=&quot;\t&quot; &#39;{print $10, $11, $12, $13 &quot;:&quot; $9, $6, $7}&#39; \
+ | grep -v &#39;^NC_001566.1&#39; | sort -k1,1 -k2,2n \
+ &gt; ${DIR_ANALYSIS}/SNPs_for_Analysis.bed
+
+sort --parallel=8 -k1,1 -k2,2n \
+ ${DIR_ANALYSIS}/SNPs_for_Analysis.bed \
+ &gt; ${DIR_ANALYSIS}/SNPs_for_Analysis_Sorted.bed</code></pre>
+<p>The resultant <code>SNPs_for_Analysis_Sorted.bed</code> bed should look like this:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td>NC_037638.1</td>
+<td>54751</td>
+<td>54751</td>
+<td>snp_99616:LOC107964061</td>
+<td>.</td>
+<td>+</td>
+</tr>
+<tr class="even">
+<td>NC_037638.1</td>
+<td>91396</td>
+<td>91396</td>
+<td>snp_99617:LOC113219112</td>
+<td>.</td>
+<td>+</td>
+</tr>
+<tr class="odd">
+<td>NC_037638.1</td>
+<td>147182</td>
+<td>147182</td>
+<td>snp_99618:LOC726544</td>
+<td>.</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="quantification-of-f2-allele-specific-transcription" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Quantification of F2 allele-specific transcription<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#quantification-of-f2-allele-specific-transcription" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="mrna-seq-read-pre-processing" class="section level3 hasAnchor" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> mRNA-seq read pre-processing<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#mrna-seq-read-pre-processing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="retrieve-mrna-seq-reads-from-sra" class="section level4 hasAnchor" number="2.4.1.1">
+<h4><span class="header-section-number">2.4.1.1</span> Retrieve mRNA-seq reads from SRA<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#retrieve-mrna-seq-reads-from-sra" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<table>
+<thead>
+<tr class="header">
+<th>SRA</th>
+<th>Cross</th>
+<th>Phenotype</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>SRR28865816</td>
+<td>A</td>
+<td>Worker</td>
+</tr>
+<tr class="even">
+<td>SRR28865815</td>
+<td>A</td>
+<td>Worker</td>
+</tr>
+<tr class="odd">
+<td>SRR28865811</td>
+<td>A</td>
+<td>Queen</td>
+</tr>
+<tr class="even">
+<td>SRR28865812</td>
+<td>A</td>
+<td>Queen</td>
+</tr>
+<tr class="odd">
+<td>SRR28865777</td>
+<td>A</td>
+<td>Queen</td>
+</tr>
+<tr class="even">
+<td>SRR28865776</td>
+<td>A</td>
+<td>Worker</td>
+</tr>
+<tr class="odd">
+<td>SRR28865775</td>
+<td>A</td>
+<td>Queen</td>
+</tr>
+<tr class="even">
+<td>SRR28865774</td>
+<td>A</td>
+<td>Worker</td>
+</tr>
+<tr class="odd">
+<td>SRR28865773</td>
+<td>A</td>
+<td>Queen</td>
+</tr>
+<tr class="even">
+<td>SRR28865772</td>
+<td>B</td>
+<td>Queen</td>
+</tr>
+<tr class="odd">
+<td>SRR28865770</td>
+<td>B</td>
+<td>Queen</td>
+</tr>
+<tr class="even">
+<td>SRR28865769</td>
+<td>B</td>
+<td>Worker</td>
+</tr>
+<tr class="odd">
+<td>SRR28865768</td>
+<td>B</td>
+<td>Queen</td>
+</tr>
+<tr class="even">
+<td>SRR28865771</td>
+<td>B</td>
+<td>Queen</td>
+</tr>
+<tr class="odd">
+<td>SRR28865767</td>
+<td>B</td>
+<td>Worker</td>
+</tr>
+<tr class="even">
+<td>SRR28865808</td>
+<td>B</td>
+<td>Worker</td>
+</tr>
+<tr class="odd">
+<td>SRR28865806</td>
+<td>B</td>
+<td>Worker</td>
+</tr>
+<tr class="even">
+<td>SRR28865804</td>
+<td>A</td>
+<td>Worker</td>
+</tr>
+<tr class="odd">
+<td>SRR28865803</td>
+<td>B</td>
+<td>Worker</td>
+</tr>
+<tr class="even">
+<td>SRR28865802</td>
+<td>B</td>
+<td>Queen</td>
+</tr>
+</tbody>
+</table>
+<pre><code>DIR_RAW=&quot;AST-tutorial/RAW/mRNA&quot;
+
+FILES=(SRR28865816 SRR28865815 SRR28865811 SRR28865812 \
+       SRR28865777 SRR28865776 SRR28865775 SRR28865774 \
+       SRR28865773 SRR28865772 SRR28865770 SRR28865769 \
+       SRR28865768 SRR28865771 SRR28865767 SRR28865808 \
+       SRR28865806 SRR28865804 SRR28865803 SRR28865802)
+
+for FILE in &quot;${FILES[@]}&quot;
+do
+  prefetch -O ${DIR_RAW} ${FILE}
+  fasterq-dump -O ${DIR_RAW} ${DIR_RAW}/${FILE}.sra
+  rm ${DIR_RAW}/{FILE}.sra
+done</code></pre>
+</div>
+<div id="assess-raw-quality-control-metrics-1" class="section level4 hasAnchor" number="2.4.1.2">
+<h4><span class="header-section-number">2.4.1.2</span> Assess raw quality control metrics<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#assess-raw-quality-control-metrics-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<pre><code>DIR_RAW=&quot;AST-tutorial/RAW/mRNA&quot;
+DIR_REPORTS=&quot;AST-tutorial/REPORTS/mRNA&quot;
+THREADS=&quot;integer number of threads for parallel processing, usually 4 is fine&quot;
+
+FILES=(SRR28865816 SRR28865815 SRR28865811 SRR28865812 \
+       SRR28865777 SRR28865776 SRR28865775 SRR28865774 \
+       SRR28865773 SRR28865772 SRR28865770 SRR28865769 \
+       SRR28865768 SRR28865771 SRR28865767 SRR28865808 \
+       SRR28865806 SRR28865804 SRR28865803 SRR28865802)
+
+for FILE in &quot;${FILES[@]}&quot;
+do
+  fastqc \
+  -t ${THREADS} \
+  ${DIR_RAW}/${FILE}_1.fastq ${DIR_RAW}/${FILE}_2.fastq \
+  --outdir ${DIR_REPORTS}
+done</code></pre>
+</div>
+<div id="trim-and-filter-reads-1" class="section level4 hasAnchor" number="2.4.1.3">
+<h4><span class="header-section-number">2.4.1.3</span> Trim and filter reads<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#trim-and-filter-reads-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<pre><code>DIR_RAW=&quot;AST-tutorial/RAW/mRNA&quot;
+DIR_TRIM=&quot;AST-tutorial/TRIM/mRNA&quot;
+DIR_REPORTS=&quot;AST-tutorial/REPORTS/mRNA&quot;
+THREADS=&quot;integer number of threads for parallel processing, usually 8 is fine&quot;
+
+FILES=(SRR28865816 SRR28865815 SRR28865811 SRR28865812 \
+       SRR28865777 SRR28865776 SRR28865775 SRR28865774 \
+       SRR28865773 SRR28865772 SRR28865770 SRR28865769 \
+       SRR28865768 SRR28865771 SRR28865767 SRR28865808 \
+       SRR28865806 SRR28865804 SRR28865803 SRR28865802)
+
+for FILE in &quot;${FILES[@]}&quot;
+do
+  fastp \
+  -w ${THREADS} \
+  -i ${DIR_RAW}/${FILE}_1.fastq -I ${DIR_RAW}/${FILE}_2.fastq \
+  -o ${DIR_TRIM}/${FILE}_1.fastq -O ${DIR_TRIM}/${FILE}_2.fastq \
+  -j ${DIR_REPORTS}/${FILE}_fastp.json
+done</code></pre>
+</div>
+<div id="aggregate-qc-reports-with-multiqc-1" class="section level4 hasAnchor" number="2.4.1.4">
+<h4><span class="header-section-number">2.4.1.4</span> Aggregate QC reports with MultiQC<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#aggregate-qc-reports-with-multiqc-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<pre><code>DIR_REPORTS=&quot;AST-tutorial/REPORTS/mRNA&quot;
+multiqc ${DIR_REPORTS}/. \
+  -o ${DIR_REPORTS} \
+  -n mRNA.html</code></pre>
+</div>
+</div>
+<div id="mrna-seq-read-alignment-to-f1-transcriptomes" class="section level3 hasAnchor" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> mRNA-seq read alignment to F1 transcriptomes<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#mrna-seq-read-alignment-to-f1-transcriptomes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Here, the mRNA-seq reads for each F2 sample are aligned to their respective parental (F1) transcriptomes.</p>
+<pre><code>DIR_TRIM=&quot;AST-tutorial/TRIM/mRNA&quot;
+DIR_PARENT_GENOMES=&quot;AST-tutorial/PARENT_GENOMES&quot;
+DIR_ALIGN=&quot;AST-tutorial/ALIGN_PARENT_GENOMES/UNFILTERED&quot;
+DIR_INDEX=&quot;AST-tutorial/INDEX&quot;
+THREADS=&quot;integer number of threads for parallel processing, usually 8 is fine&quot;
+
+CrossApat=&quot;SRR28865844&quot;
+CrossAmat=&quot;SRR28865843&quot;
+CrossA=(SRR28865816 SRR28865815 SRR28865811 SRR28865812 \
+        SRR28865777 SRR28865776 SRR28865775 SRR28865774 \
+        SRR28865773 SRR28865804)
+
+for FILE in &quot;${CrossA[@]}&quot;
+do
+  STAR \
+  --outSAMtype BAM SortedByCoordinate \
+  --runThreadN ${THREADS} \
+  --sjdbGTFfile ${DIR_INDEX}/Amel_HAv3.1.gtf \
+  --genomeDir ${DIR_PARENT_GENOMES}/${CrossApat} \
+  --readFilesIn ${DIR_TRIM}/${FILE}_1.fastq ${DIR_TRIM}/${FILE}_2.fastq \
+  --outFileNamePrefix ${DIR_ALIGN}/${CrossApat}_${FILE} \
+  --outSAMattributes NH HI AS nM NM
+  
+  STAR \
+  --outSAMtype BAM SortedByCoordinate \
+  --runThreadN ${THREADS} \
+  --sjdbGTFfile ${DIR_INDEX}/Amel_HAv3.1.gtf \
+  --genomeDir ${DIR_PARENT_GENOMES}/${CrossAmat} \
+  --readFilesIn ${DIR_TRIM}/${FILE}_1.fastq ${DIR_TRIM}/${FILE}_2.fastq \
+  --outFileNamePrefix ${DIR_ALIGN}/${CrossAmat}_${FILE} \
+  --outSAMattributes NH HI AS nM NM
+done
+
+CrossBpat=&quot;SRR28865842&quot;
+CrossBmat=&quot;SRR28865841&quot;
+CrossB=(SRR28865772 SRR28865770 SRR28865769 SRR28865768 \
+        SRR28865771 SRR28865767 SRR28865808 SRR28865806 \
+        SRR28865803 SRR28865802)
+
+for FILE in &quot;${CrossB[@]}&quot;
+do
+  STAR \
+  --outSAMtype BAM SortedByCoordinate \
+  --runThreadN ${THREADS} \
+  --sjdbGTFfile ${DIR_INDEX}/Amel_HAv3.1.gtf \
+  --genomeDir ${DIR_PARENT_GENOMES}/${CrossBpat} \
+  --readFilesIn ${DIR_TRIM}/${FILE}_1.fastq ${DIR_TRIM}/${FILE}_2.fastq \
+  --outFileNamePrefix ${DIR_ALIGN}/${CrossBpat}_${FILE} \
+  --outSAMattributes NH HI AS nM NM
+  
+  STAR \
+  --outSAMtype BAM SortedByCoordinate \
+  --runThreadN ${THREADS} \
+  --sjdbGTFfile ${DIR_INDEX}/Amel_HAv3.1.gtf \
+  --genomeDir ${DIR_PARENT_GENOMES}/${CrossBmat} \
+  --readFilesIn ${DIR_TRIM}/${FILE}_1.fastq ${DIR_TRIM}/${FILE}_2.fastq \
+  --outFileNamePrefix ${DIR_ALIGN}/${CrossBmat}_${FILE} \
+  --outSAMattributes NH HI AS nM NM
+done</code></pre>
+</div>
+<div id="mrna-seq-alignment-post-processing-and-allele-specific-read-counting" class="section level3 hasAnchor" number="2.4.3">
+<h3><span class="header-section-number">2.4.3</span> mRNA-seq alignment post-processing and allele-specific read counting<a href="sequence-reads-to-snp-level-parent-specific-read-counts-1.html#mrna-seq-alignment-post-processing-and-allele-specific-read-counting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This final step seems a bit convoluted at first, but after testing many other read counting tools, I found this is the only approach that allows for counting strand-specific reads at the SNP-level without making any additional assumptions.</p>
+<pre><code>DIR_ANALYSIS=&quot;AST-tutorial/ANALYSIS_SETS&quot;
+DIR_INDEX=&quot;AST-tutorial/INDEX&quot;
+DIR_ALIGN=&quot;AST-tutorial/ALIGN_PARENT_GENOMES/UNFILTERED&quot;
+DIR_ALIGN_FILTERED=&quot;AST-tutorial/ALIGN_PARENT_GENOMES/FILTERED&quot;
+DIR_COUNT=&quot;AST-tutorial/COUNT&quot;
+THREADS=&quot;integer number of threads for parallel processing, usually 8 is fine&quot;
+ASET=&quot;${DIR_ANALYSIS}/SNPs_for_Analysis_Sorted.bed&quot;
+
+Parents=(&quot;SRR28865844&quot; &quot;SRR28865843&quot;)
+CrossA=(SRR28865816 SRR28865815 SRR28865811 SRR28865812 \
+        SRR28865777 SRR28865776 SRR28865775 SRR28865774 \
+        SRR28865773 SRR28865804)
+
+for FILE in &quot;${CrossA[@]}&quot;
+do
+  for PARENT in &quot;${Parents[@]}&quot;
+  do
+    # Keep only mapped, primary alignments with 0 mismatches
+    samtools view -@ ${THREADS} -m 6G -e &#39;[NM]==0&#39; -F 260 -O BAM \
+    ${DIR_ALIGN}/${PARENT}_${FILE}Aligned.sortedByCoord.out.bam \
+    &gt; ${DIR_ALIGN_FILTERED}/${PARENT}_${FILE}_sorted.bam
+    
+    # Index the alignments
+    samtools index ${DIR_ALIGN_FILTERED}/${PARENT}_${FILE}_sorted.bam \
+    ${DIR_ALIGN_FILTERED}/${PARENT}_${FILE}_sorted.bam.bai
+    
+    # Convert BAM to BED
+    bedtools bamtobed -i ${DIR_ALIGN_FILTERED}/${PARENT}_${FILE}_sorted.bam \
+    &gt; ${DIR_ALIGN_FILTERED}/${PARENT}_${FILE}.bed
+    
+    # Sort BED by coordinate
+    sort --parallel=${THREADS} \
+    -k1,1 -k2,2n ${DIR_ALIGN_FILTERED}/${PARENT}_${FILE}.bed \
+    &gt; ${DIR_ALIGN_FILTERED}/${PARENT}_${FILE}_sorted.bed
+    
+    # Count reads by SNP accounting for strand of alignment
+    bedtools intersect -S -sorted -c -a ${ASET} \
+    -b ${DIR_ALIGN_FILTERED}/${PARENT}_${FILE}_sorted.bed \
+    &gt; ${DIR_COUNT}/${PARENT}_${FILE}.txt
+  done
+done
+
+
+Parents=(&quot;SRR28865842&quot; &quot;SRR28865841&quot;)
+CrossB=(SRR28865772 SRR28865770 SRR28865769 SRR28865768 \
+        SRR28865771 SRR28865767 SRR28865808 SRR28865806 \
+        SRR28865803 SRR28865802)
+
+for FILE in &quot;${CrossB[@]}&quot;
+do
+  for PARENT in &quot;${Parents[@]}&quot;
+  do
+    # Keep only mapped, primary alignments with 0 mismatches
+    samtools view -@ ${THREADS} -m 6G -e &#39;[NM]==0&#39; -F 260 -O BAM \
+    ${DIR_ALIGN}/${PARENT}_${FILE}Aligned.sortedByCoord.out.bam \
+    &gt; ${DIR_ALIGN_FILTERED}/${PARENT}_${FILE}_sorted.bam
+    
+    # Index the alignments
+    samtools index ${DIR_ALIGN_FILTERED}/${PARENT}_${FILE}_sorted.bam \
+    ${DIR_ALIGN_FILTERED}/${PARENT}_${FILE}_sorted.bam.bai
+    
+    # Convert BAM to BED
+    bedtools bamtobed -i ${DIR_ALIGN_FILTERED}/${PARENT}_${FILE}_sorted.bam \
+    &gt; ${DIR_ALIGN_FILTERED}/${PARENT}_${FILE}.bed
+    
+    # Sort BED by coordinate
+    sort --parallel=${THREADS} \
+    -k1,1 -k2,2n ${DIR_ALIGN_FILTERED}/${PARENT}_${FILE}.bed \
+    &gt; ${DIR_ALIGN_FILTERED}/${PARENT}_${FILE}_sorted.bed
+    
+    # Count reads by SNP accounting for strand of alignment
+    bedtools intersect -S -sorted -c -a ${ASET} \
+    -b ${DIR_ALIGN_FILTERED}/${PARENT}_${FILE}_sorted.bed \
+    &gt; ${DIR_COUNT}/${PARENT}_${FILE}.txt
+  done
+done</code></pre>
+<p>Resultant counts files should look identical to <code>SNPs_for_Analysis_Sorted.bed</code> with an additional column containing the read counts:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td>NC_037638.1</td>
+<td>54751</td>
+<td>54751</td>
+<td>snp_99616:LOC107964061</td>
+<td>.</td>
+<td>+</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td>NC_037638.1</td>
+<td>91396</td>
+<td>91396</td>
+<td>snp_99617:LOC113219112</td>
+<td>.</td>
+<td>+</td>
+<td>7</td>
+</tr>
+<tr class="odd">
+<td>NC_037638.1</td>
+<td>147182</td>
+<td>147182</td>
+<td>snp_99618:LOC726544</td>
+<td>.</td>
+<td>-</td>
+<td>9</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>In <a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription.html">Section 3: SNP-level parent-specific read counts to allele-specific transcription</a>, the resultant count files will be combined into a single matrix, and various statistical methods will be used to assess and compare allele-specific transcription between phenotypes.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="snp-level-parent-specific-read-counts-to-allele-specific-transcription-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/edit/main/01-Part1.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/blob/main/01-Part1.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
